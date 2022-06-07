@@ -5,7 +5,7 @@ class CRM_Endrelmail_SendMail {
 
   public static function send($relationshipId) {
     $rel = self::getRelationshipById($relationshipId);
-    if (self::isEmployeeRelationship($rel) && self::isRelationshipEnded()) {
+    if (self::isEmployeeRelationship($rel) && self::isRelationshipEnded($rel)) {
       $mailParams = self::getMailParams($rel);
       CRM_Utils_Mail::send($mailParams);
     }
