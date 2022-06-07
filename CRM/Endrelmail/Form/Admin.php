@@ -30,8 +30,7 @@ class CRM_Endrelmail_Form_Admin extends CRM_Core_Form {
 
   public function postProcess() {
     $values = $this->exportValues();
-$id = 9210;
-    CRM_Endrelmail_SendMail::send($id);exit;
+
     \Civi::settings()->set('ifoam_endrelmail', $values['target_email']);
     CRM_Core_Session::setStatus('The email address has been stored.', 'Success', 'success');
     parent::postProcess();
