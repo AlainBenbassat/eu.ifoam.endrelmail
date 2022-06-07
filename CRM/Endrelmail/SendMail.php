@@ -67,7 +67,7 @@ class CRM_Endrelmail_SendMail {
     $contactName1 = self::getContactName($rel['contact_id_a']);
     $contactName2 = self::getContactName($rel['contact_id_b']);
 
-    return "The employee relationship between $contactName1 and $contactName2 has been disabled or deleted. Do you need to update the intranet>";
+    return "The employee relationship between $contactName1 and $contactName2 has been disabled or deleted. Do you need to update the intranet?";
   }
 
   private static function getDefaultFromEmail() {
