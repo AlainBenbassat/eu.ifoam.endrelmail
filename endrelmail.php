@@ -5,7 +5,7 @@ require_once 'endrelmail.civix.php';
 use CRM_Endrelmail_ExtensionUtil as E;
 // phpcs:enable
 
-function endrelmail_postCommit($op, $objectName, $objectId, &$objectRef) {
+function endrelmail_civicrm_postCommit($op, $objectName, $objectId, &$objectRef) {
   if ($objectName == 'Relationship' && ($op == 'edit' || $op == 'delete')) {
     CRM_Endrelmail_SendMail::send($objectId);
   }

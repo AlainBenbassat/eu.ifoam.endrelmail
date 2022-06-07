@@ -68,7 +68,7 @@ class CRM_Endrelmail_SendMail {
   }
 
   private static function getDefaultFromEmail() {
-    return CRM_Core_OptionGroup::values('from_email_address', NULL, NULL, NULL, ' AND is_default = 1');
+    return CRM_Core_OptionGroup::values('from_email_address', NULL, NULL, NULL, ' AND is_default = 1')[0];
   }
 
  private static function  getContactName($contactId) {
