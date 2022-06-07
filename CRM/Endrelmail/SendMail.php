@@ -53,7 +53,7 @@ class CRM_Endrelmail_SendMail {
       'from' => self::getDefaultFromEmail(),
       'toName' => \Civi::settings()->get('ifoam_endrelmail'),
       'toEmail' => \Civi::settings()->get('ifoam_endrelmail'),
-      'subject' => 'Employee-of changed: update the intranet?',
+      'subject' => 'Employee-of changed: update the extranet?',
       'text' => $msg,
       'html' => "<p>$msg</p>",
       'replyTo' => CRM_Core_BAO_Domain::getNoReplyEmailAddress(),
@@ -67,7 +67,7 @@ class CRM_Endrelmail_SendMail {
     $contactName1 = self::getContactName($rel['contact_id_a']);
     $contactName2 = self::getContactName($rel['contact_id_b']);
 
-    return "The employee relationship between $contactName1 and $contactName2 has been disabled or deleted. Do you need to update the intranet?";
+    return "The employee relationship between $contactName1 and $contactName2 has been disabled or deleted. Do you need to update the extranet?";
   }
 
   private static function getDefaultFromEmail() {
