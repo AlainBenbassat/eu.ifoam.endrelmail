@@ -5,6 +5,7 @@ class CRM_Endrelmail_SendMail {
 
   public static function send($relationshipId) {
     $rel = self::getRelationshipById($relationshipId);
+
     if (self::isEmployeeRelationship($rel) && self::isRelationshipEnded($rel)) {
       $mailParams = self::getMailParams($rel);
       CRM_Utils_Mail::send($mailParams);
@@ -14,7 +15,7 @@ class CRM_Endrelmail_SendMail {
   private static function getRelationshipById($relationshipId) {
     $relationships = \Civi\Api4\Relationship::get()
       ->addSelect('*')
-      ->addWhere('id', '<', $relationshipId)
+      ->addWhere('id', '=', $relationshipId)
       ->execute();
     if ($relationships->count() > 0) {
       return $relationships->first();
@@ -55,6 +56,8 @@ class CRM_Endrelmail_SendMail {
       'subject' => 'Employee-of changed: update the intranet?',
       'text' => $msg,
       'html' => "<p>$msg</p>",
+      'replyTo' => CRM_Core_BAO_Domain::getNoReplyEmailAddress(),
+      'returnPath' => CRM_Core_BAO_Domain::getNoReplyEmailAddress(),
     ];
 
     return $mailParams;
@@ -68,7 +71,8 @@ class CRM_Endrelmail_SendMail {
   }
 
   private static function getDefaultFromEmail() {
-    return CRM_Core_OptionGroup::values('from_email_address', NULL, NULL, NULL, ' AND is_default = 1')[0];
+    $listofEmails = CRM_Core_OptionGroup::values('from_email_address', NULL, NULL, NULL, ' AND is_default = 1');
+    return reset($listofEmails);
   }
 
  private static function  getContactName($contactId) {
